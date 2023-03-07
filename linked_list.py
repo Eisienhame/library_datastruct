@@ -13,18 +13,13 @@ class LinkedList:
     def insert_beginning(self, data):
         self.sum_of_items += 1
         if self.head is None:
-            self.head = Node(data)
-
+            self.head = Node(data, None)
         else:
-            if self.sum_of_items == 2:
-                x = self.head
-                self.head = Node(data)
-                self.head.next_node = x
-            elif self.sum_of_items == 3:
-                x = self.head
-                self.head = Node(data)
-                self.head.next_node = x
-                self.head.next_node.next_node = x.next_node
+            x = self.head
+            self.head = Node(data)
+            self.head.next_node = x
+
+
 
 
 
@@ -34,26 +29,12 @@ class LinkedList:
         if self.head is None:
             self.head = Node(data)
         else:
-            if self.sum_of_items == 1:
-                self.head.next_node = Node(data)
-                self.tail = Node(data)
-            # elif self.sum_of_items == 2:
-            #     self.head.next_node.next_node = Node(data)
-            #     self.tail = Node(data)
-            # elif self.sum_of_items == 3:
-            #     self.head.next_node.next_node.next_node = Node(data)
-            #     self.tail = Node(data)
-            # elif self.sum_of_items == 4:
-            #     self.head.next_node.next_node.next_node.next_node = Node(data)
-            #     self.tail = Node(data)
-            # elif self.sum_of_items == 5:
-            #     self.head.next_node.next_node.next_node.next_node.next_node = Node(data)
-            #     self.tail = Node(data)
-            #
+            x = self.head
+            while x.next_node:
+                x = x.next_node
+            x.next_node = Node(data)
 
-
-
-
+        self.tail = Node(data)
     def print_ll(self):
         ll_string = ''
         node = self.head
@@ -68,6 +49,7 @@ class LinkedList:
         print(self.sum_of_items)
 
 ll = LinkedList()
+
 print(ll.head)
 ll.insert_beginning({'id': 1})
 ll.insert_at_end({'id': 2})
