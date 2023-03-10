@@ -20,9 +20,6 @@ class LinkedList:
             self.head.next_node = x
 
 
-
-
-
     def insert_at_end(self, data):
         self.sum_of_items += 1
 
@@ -48,11 +45,38 @@ class LinkedList:
         print(ll_string)
         print(self.sum_of_items)
 
+    def to_list(self):
+        'возвращает список с данными, содержащимися в односвязном списке LinkedList'
+        need_list = []
+        node = self.head
+        while node:
+            need_list.append(node.data)
+            node = node.next_node
+        return need_list
+    def get_data_by_id(self, id):
+        'возвращает первый найденный в LinkedList словарь с ключом id'
+        x = self.to_list()
+        catch_them_all = None
+        try:
+            for item in x:
+                if item['id'] == id:
+                    catch_them_all = item
+            if catch_them_all != None:
+                return catch_them_all
+            else:
+                raise TypeError
+        except TypeError:
+            print('Данные не являются словарем или в словаре нет id.')
+
 ll = LinkedList()
 
-print(ll.head)
-ll.insert_beginning({'id': 1})
-ll.insert_at_end({'id': 2})
-ll.insert_at_end({'id': 3})
-ll.insert_beginning({'id': 0})
-ll.print_ll()
+ll.insert_beginning({'id': 1, 'username': 'lazzy508509'})
+ll.insert_at_end({'id': 2, 'username': 'mik.roz'})
+ll.insert_at_end({'id': 3, 'username': 'mosh_s'})
+ll.insert_beginning({'id': 0, 'username': 'serebro'})
+lst = ll.to_list()
+print(lst)
+
+user_data = ll.get_data_by_id(7)
+print(user_data)
+
